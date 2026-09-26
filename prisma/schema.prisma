@@ -1,0 +1,36 @@
+// Rescue Rituals — Events module schema
+// Simple by design: Events with RSVPs. No auth/users (role is a UI toggle).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Event {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  date        String // YYYY-MM-DD
+  time        String // HH:MM
+  location    String
+  rsvps       Rsvp[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Rsvp {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId   String
+  createdAt DateTime @default(now())
+
+  // One RSVP per email per event
+  @@unique([eventId, email])
+}
