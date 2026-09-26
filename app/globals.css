@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/* Rescue Rituals — color palette (warm, subtle). Light-first with a warm dark mode. */
+:root {
+  --background: #faf7f2; /* warm off-white */
+  --foreground: #2c2824;
+
+  --card: #ffffff;
+  --card-foreground: #2c2824;
+
+  --muted: #f2ede5;
+  --muted-foreground: #82796d;
+
+  --border: #eae3d8;
+
+  /* one warm brand accent, used consistently */
+  --accent: #c26a48;
+  --accent-foreground: #ffffff;
+  --accent-soft: #f6e8e0;
+
+  /* status — subtle green for "You're RSVP'd" */
+  --success: #4a9d70;
+  --success-foreground: #ffffff;
+  --success-soft: #e6f1ea;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #1f1b18;
+    --foreground: #f1eae1;
+
+    --card: #282320;
+    --card-foreground: #f1eae1;
+
+    --muted: #302a25;
+    --muted-foreground: #b0a598;
+
+    --border: #393129;
+
+    --accent: #d67e5e;
+    --accent-foreground: #1f1b18;
+    --accent-soft: #382823;
+
+    --success: #5cae82;
+    --success-foreground: #14231a;
+    --success-soft: #21302a;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-soft: var(--accent-soft);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-soft: var(--success-soft);
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
