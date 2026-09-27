@@ -1,50 +1,35 @@
 @import "tailwindcss";
 
-/* Rescue Rituals — color palette (warm, subtle). Light-first with a warm dark mode. */
+/*
+  Rescue Rituals — theme matched to myrescuerituals.com
+  Light, white, teal-blue accent, DM Sans + DM Serif Display.
+*/
+
 :root {
-  --background: #faf7f2; /* warm off-white */
-  --foreground: #2c2824;
+  --background: #ffffff;
+  --foreground: #1a1a1a;
 
   --card: #ffffff;
-  --card-foreground: #2c2824;
+  --card-foreground: #1a1a1a;
 
-  --muted: #f2ede5;
-  --muted-foreground: #82796d;
+  --muted: #f3f5f7;
+  --muted-foreground: #6b7280;
 
-  --border: #eae3d8;
+  --border: #e6e8eb;
 
-  /* one warm brand accent, used consistently */
-  --accent: #c26a48;
+  /* Brand accent — teal-blue */
+  --accent: #0182b0;
+  --accent-strong: #016a8f;
+  --accent-soft: #e1f0f6;
   --accent-foreground: #ffffff;
-  --accent-soft: #f6e8e0;
 
-  /* status — subtle green for "You're RSVP'd" */
-  --success: #4a9d70;
+  /* Status — green for "You're RSVP'd" */
+  --success: #2f9e63;
+  --success-strong: #1f7a4a;
+  --success-soft: #e4f3ea;
   --success-foreground: #ffffff;
-  --success-soft: #e6f1ea;
-}
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #1f1b18;
-    --foreground: #f1eae1;
-
-    --card: #282320;
-    --card-foreground: #f1eae1;
-
-    --muted: #302a25;
-    --muted-foreground: #b0a598;
-
-    --border: #393129;
-
-    --accent: #d67e5e;
-    --accent-foreground: #1f1b18;
-    --accent-soft: #382823;
-
-    --success: #5cae82;
-    --success-foreground: #14231a;
-    --success-soft: #21302a;
-  }
+  --ring: #0182b0;
 }
 
 @theme inline {
@@ -55,19 +40,30 @@
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
   --color-border: var(--border);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent-soft: var(--accent-soft);
-  --color-success: var(--success);
-  --color-success-foreground: var(--success-foreground);
-  --color-success-soft: var(--success-soft);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-success: var(--success);
+  --color-success-strong: var(--success-strong);
+  --color-success-soft: var(--success-soft);
+  --color-success-foreground: var(--success-foreground);
+
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-dm-serif);
+
+  --radius-lg: 12px;
+  --radius-xl: 14px;
+  --radius-2xl: 18px;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }

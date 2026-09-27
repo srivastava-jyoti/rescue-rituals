@@ -22,7 +22,7 @@ export function Navbar() {
           <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent-soft text-accent">
             <PawPrint className="h-5 w-5" strokeWidth={2.25} />
           </span>
-          <span className="text-lg font-semibold tracking-tight">Rescue Rituals</span>
+          <span className="font-serif text-xl tracking-tight">Rescue Rituals</span>
         </Link>
 
         <div className="flex items-center gap-1 rounded-lg bg-muted p-1">

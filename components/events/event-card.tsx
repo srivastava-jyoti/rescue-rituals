@@ -50,7 +50,7 @@ export function EventCard({
         ) : (
           <Link
             href={detailHref}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-strong"
+            className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-strong"
           >
             View &amp; RSVP
             <ArrowRight className="h-4 w-4" />

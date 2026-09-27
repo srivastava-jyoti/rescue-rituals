@@ -8,7 +8,7 @@ export function Footer() {
           <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-accent-soft text-accent">
             <PawPrint className="h-4 w-4" strokeWidth={2.25} />
           </span>
-          <span className="text-sm font-semibold tracking-tight">Rescue Rituals</span>
+          <span className="font-serif text-base tracking-tight">Rescue Rituals</span>
         </div>
         <p className="text-xs text-muted-foreground">
           © {new Date().getFullYear()} Rescue Rituals.

@@ -100,7 +100,7 @@ export function RsvpForm({ eventId }: { eventId: string }) {
       {serverError && <p className="text-sm text-red-600">{serverError}</p>}
 
       <button type="submit" disabled={submitting}
-        className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:bg-accent-strong disabled:opacity-50">
+        className="rounded-full bg-accent px-5 py-2 text-sm font-semibold text-accent-foreground hover:bg-accent-strong disabled:opacity-50">
         {submitting ? "Submitting…" : "RSVP"}
       </button>
     </form>
