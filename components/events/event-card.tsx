@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Pencil, ArrowRight } from "lucide-react";
+import { Pencil, ArrowRight, Users } from "lucide-react";
 import { DeleteButton } from "@/components/events/delete-button";
 import type { EventWithCount } from "@/lib/events";
 
@@ -15,7 +15,6 @@ export function EventCard({
 
   return (
     <div className="flex flex-col rounded-2xl border border-border bg-card p-5 transition-colors hover:border-accent/50">
-      {/* Clickable content → detail page */}
       <Link href={detailHref} className="group flex-1">
         <h2 className="font-semibold transition-colors group-hover:text-accent">
           {event.title}
@@ -41,10 +40,11 @@ export function EventCard({
             <DeleteButton eventId={event.id} />
             <Link
               href={detailHref}
-              className="ml-auto inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent-strong"
+              className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-accent-soft px-3 py-1.5 text-sm font-medium text-accent transition-colors hover:brightness-95"
             >
-              View RSVPs ({event._count.rsvps})
-              <ArrowRight className="h-4 w-4" />
+              <Users className="h-3.5 w-3.5" />
+              {event._count.rsvps} RSVP{event._count.rsvps === 1 ? "" : "s"}
+              <ArrowRight className="h-3.5 w-3.5" />
             </Link>
           </>
         ) : (

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Calendar, MapPin } from "lucide-react";
+import { ArrowLeft, Calendar, MapPin, Mail, Phone, Users } from "lucide-react";
 import { getEventById } from "@/lib/events";
 import { RsvpForm } from "@/components/events/rsvp-form";
 
@@ -45,17 +45,41 @@ export default async function EventDetailPage({
         {isAdmin ? (
           // ADMIN: who has RSVP'd
           <div>
-            <h2 className="font-semibold">RSVPs ({event.rsvps.length})</h2>
+            <div className="flex items-center gap-2">
+              <Users className="h-5 w-5 text-muted-foreground" />
+              <h2 className="text-lg font-semibold">Attendees</h2>
+              <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-sm font-medium text-accent">
+                {event.rsvps.length}
+              </span>
+            </div>
+
             {event.rsvps.length === 0 ? (
-              <p className="mt-2 text-sm text-muted-foreground">No RSVPs yet.</p>
+              <p className="mt-4 rounded-2xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
+                No one has RSVP&apos;d yet.
+              </p>
             ) : (
-              <ul className="mt-3 divide-y divide-border overflow-hidden rounded-2xl border border-border bg-card">
+              <ul className="mt-4 space-y-2">
                 {event.rsvps.map((r) => (
-                  <li key={r.id} className="p-4">
-                    <p className="font-medium">{r.name}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {r.email} · {r.phone}
-                    </p>
+                  <li
+                    key={r.id}
+                    className="flex items-center gap-3 rounded-xl border border-border bg-card p-3"
+                  >
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-accent-soft text-sm font-semibold text-accent">
+                      {r.name.charAt(0).toUpperCase()}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate font-medium">{r.name}</p>
+                      <div className="mt-0.5 flex flex-col gap-0.5 text-xs text-muted-foreground sm:flex-row sm:gap-4">
+                        <span className="inline-flex min-w-0 items-center gap-1">
+                          <Mail className="h-3 w-3 shrink-0" />
+                          <span className="truncate">{r.email}</span>
+                        </span>
+                        <span className="inline-flex shrink-0 items-center gap-1">
+                          <Phone className="h-3 w-3 shrink-0" />
+                          {r.phone}
+                        </span>
+                      </div>
+                    </div>
                   </li>
                 ))}
               </ul>
