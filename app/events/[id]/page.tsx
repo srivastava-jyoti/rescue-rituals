@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft, Calendar, MapPin, Mail, Phone, Users } from "lucide-react";
 import { getEventById } from "@/lib/events";
 import { RsvpForm } from "@/components/events/rsvp-form";
+import { formatTime } from "@/lib/format";
 
 export default async function EventDetailPage({
   params,
@@ -32,7 +33,7 @@ export default async function EventDetailPage({
       <div className="mt-2 space-y-1 text-sm text-muted-foreground">
         <p className="flex items-center gap-2">
           <Calendar className="h-4 w-4" />
-          {event.date} at {event.time}
+          {event.date} at {formatTime(event.time)}
         </p>
         <p className="flex items-center gap-2">
           <MapPin className="h-4 w-4" />

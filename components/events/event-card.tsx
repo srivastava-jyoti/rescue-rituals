@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Pencil, ArrowRight, Users } from "lucide-react";
 import { DeleteButton } from "@/components/events/delete-button";
 import type { EventWithCount } from "@/lib/events";
+import { formatTime } from "@/lib/format";
 
 export function EventCard({
   event,
@@ -21,7 +22,7 @@ export function EventCard({
         </h2>
         <p className="mt-1 text-sm text-muted-foreground">{event.description}</p>
         <div className="mt-3 space-y-0.5 text-sm text-muted-foreground">
-          <p>{event.date} at {event.time}</p>
+          <p>{event.date} at {formatTime(event.time)}</p>
           <p>{event.location}</p>
         </div>
       </Link>
