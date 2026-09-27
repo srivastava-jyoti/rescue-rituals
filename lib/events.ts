@@ -7,6 +7,11 @@ export function getEvents() {
   });
 }
 
+// Get a single event by its id (null if it doesn't exist).
+export function getEventById(id: string) {
+  return prisma.event.findUnique({ where: { id } });
+}
+
 export type NewEventInput = {
   title: string;
   description: string;
@@ -18,4 +23,9 @@ export type NewEventInput = {
 // Insert a new event into the database.
 export function createEvent(data: NewEventInput) {
   return prisma.event.create({ data });
+}
+
+// Update an existing event by id.
+export function updateEvent(id: string, data: NewEventInput) {
+  return prisma.event.update({ where: { id }, data });
 }

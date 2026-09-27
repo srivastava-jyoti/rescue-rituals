@@ -33,7 +33,7 @@ export default async function EventsPage({
 
       <div className="mt-6 grid gap-4 sm:grid-cols-2">
         {events.map((event) => (
-          <EventCard key={event.id} event={event} />
+          <EventCard key={event.id} event={event} isAdmin={isAdmin} />
         ))}
       </div>
     </div>
