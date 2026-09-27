@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Rescue Rituals — Events Module
 
-## Getting Started
+A consumer-facing **Events module** for an animal rescue platform: browse events,
+view details, RSVP, and (as an admin) create, edit, and delete events and see who
+has RSVP'd.
 
-First, run the development server:
+Built as a fullstack app with the Next.js App Router, a Postgres database via
+Prisma, and a warm, mobile-first UI.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Tech stack
+
+- **Next.js 16** (App Router, Route Handlers)
+- **TypeScript**
+- **Tailwind CSS v4**
+- **PostgreSQL** + **Prisma 6**
+- **lucide-react** icons
+
+## Roles (no login)
+
+Roles are a simple mode toggle in the navbar (there is no auth) — both roles use
+the same URLs, and the `?role=` query decides what's shown:
+
+- **User** (`/events?role=user`) — browse events, open an event, and RSVP.
+- **Admin** (`/events?role=admin`) — create / edit / delete events and view each
+  event's attendee list and count.
+
+## Features
+
+- Event list with **search** by title or location
+- Event detail page
+- Create / edit event forms with front-end **and** back-end validation
+- Delete with a confirmation modal
+- RSVP (name, email, phone) — one RSVP per email per event
+- Admin sees the RSVP count on each card and the full attendee list per event
+
+## Getting started
+
+1. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+2. Set your database connection in `.env`:
+
+   ```bash
+   DATABASE_URL="postgresql://user@localhost:5432/rescue_rituals?schema=public"
+   ```
+
+3. Apply the schema and seed sample data:
+
+   ```bash
+   npx prisma migrate deploy
+   npm run db:seed
+   ```
+
+4. Run the dev server:
+
+   ```bash
+   npm run dev
+   ```
+
+   Open http://localhost:3000 (redirects to `/events`).
+
+## API
+
+| Method | Route                     | Description                 |
+| ------ | ------------------------- | --------------------------- |
+| GET    | `/api/events`             | List events                 |
+| POST   | `/api/events`             | Create an event             |
+| GET    | `/api/events/:id`         | Get one event (with RSVPs)  |
+| PUT    | `/api/events/:id`         | Update an event             |
+| DELETE | `/api/events/:id`         | Delete an event             |
+| POST   | `/api/events/:id/rsvp`    | RSVP to an event            |
+
+## Project structure
+
+```
+app/
+  page.tsx                 Redirects to /events
+  events/
+    page.tsx               Events list (search + cards)
+    [id]/page.tsx          Event detail (RSVP form / attendee list)
+    [id]/edit/page.tsx     Edit form
+    new/page.tsx           Create form
+  api/events/...           Route handlers (REST)
+components/
+  layout/                  Navbar, Footer
+  events/                  EventCard, EventsBrowser, RsvpForm, DeleteButton
+lib/
+  prisma.ts                Prisma client
+  events.ts                Data-access / service functions
+prisma/
+  schema.prisma            Event + Rsvp models
+  seed.ts                  Sample data
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Data model
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Event** — title, description, date, time, location
+- **Rsvp** — name, email, phone, linked to an event (`@@unique([eventId, email])`)
