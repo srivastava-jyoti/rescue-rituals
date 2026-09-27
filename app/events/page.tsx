@@ -14,7 +14,6 @@ export default async function EventsPage({
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-6">
-      {/* Header row: title on the left, Create button on the right (admin only) */}
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Events</h1>
