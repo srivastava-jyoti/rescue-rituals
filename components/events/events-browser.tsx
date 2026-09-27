@@ -38,7 +38,16 @@ export function EventsBrowser({
       </div>
 
       {/* Results */}
-      {filtered.length === 0 ? (
+      {events.length === 0 ? (
+        <div className="mt-6 rounded-2xl border border-dashed border-border p-10 text-center">
+          <p className="text-sm font-medium">No events yet</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            {isAdmin
+              ? "Create your first event to get started."
+              : "Check back soon for upcoming events."}
+          </p>
+        </div>
+      ) : filtered.length === 0 ? (
         <p className="mt-6 rounded-2xl border border-dashed border-border p-8 text-center text-sm text-muted-foreground">
           No events match &ldquo;{query}&rdquo;.
         </p>
