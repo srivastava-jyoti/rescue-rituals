@@ -1,36 +1,62 @@
-import type { Event } from "@prisma/client";
 import Link from "next/link";
-import { Pencil } from "lucide-react";
+import { Pencil, ArrowRight } from "lucide-react";
 import { DeleteButton } from "@/components/events/delete-button";
+import type { EventWithCount } from "@/lib/events";
 
 export function EventCard({
   event,
   isAdmin = false,
 }: {
-  event: Event;
+  event: EventWithCount;
   isAdmin?: boolean;
 }) {
-  return (
-    <div className="rounded-2xl border border-border bg-card p-5">
-      <h2 className="font-semibold">{event.title}</h2>
-      <p className="mt-1 text-sm text-muted-foreground">{event.description}</p>
-      <div className="mt-3 space-y-0.5 text-sm text-muted-foreground">
-        <p>{event.date} at {event.time}</p>
-        <p>{event.location}</p>
-      </div>
+  const role = isAdmin ? "admin" : "user";
+  const detailHref = `/events/${event.id}?role=${role}`;
 
-      {isAdmin && (
-        <div className="mt-4 flex gap-2">
-          <Link
-            href={`/events/${event.id}/edit?role=admin`}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
-          >
-            <Pencil className="h-3.5 w-3.5" />
-            Edit
-          </Link>
-          <DeleteButton eventId={event.id} />
+  return (
+    <div className="flex flex-col rounded-2xl border border-border bg-card p-5 transition-colors hover:border-accent/50">
+      {/* Clickable content → detail page */}
+      <Link href={detailHref} className="group flex-1">
+        <h2 className="font-semibold transition-colors group-hover:text-accent">
+          {event.title}
+        </h2>
+        <p className="mt-1 text-sm text-muted-foreground">{event.description}</p>
+        <div className="mt-3 space-y-0.5 text-sm text-muted-foreground">
+          <p>{event.date} at {event.time}</p>
+          <p>{event.location}</p>
         </div>
-      )}
+      </Link>
+
+      {/* Actions */}
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {isAdmin ? (
+          <>
+            <Link
+              href={`/events/${event.id}/edit?role=admin`}
+              className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
+            >
+              <Pencil className="h-3.5 w-3.5" />
+              Edit
+            </Link>
+            <DeleteButton eventId={event.id} />
+            <Link
+              href={detailHref}
+              className="ml-auto inline-flex items-center gap-1 text-sm font-medium text-accent transition-colors hover:text-accent-strong"
+            >
+              View RSVPs ({event._count.rsvps})
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </>
+        ) : (
+          <Link
+            href={detailHref}
+            className="inline-flex items-center gap-1.5 rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-strong"
+          >
+            View &amp; RSVP
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        )}
+      </div>
     </div>
   );
 }
