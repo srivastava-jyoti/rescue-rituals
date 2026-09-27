@@ -12,7 +12,6 @@ const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
 });
 
-// Run server rendering in Mumbai, next to the Supabase database.
 export const preferredRegion = "bom1";
 
 export const metadata: Metadata = {
