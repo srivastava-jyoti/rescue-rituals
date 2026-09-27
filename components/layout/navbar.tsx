@@ -30,6 +30,7 @@ export function Navbar() {
             <Link
               key={tab.label}
               href={tab.href}
+              prefetch={false}
               className={`rounded-md px-3 py-1.5 text-sm font-medium transition-colors ${
                 tab.active
                   ? "bg-card text-foreground shadow-sm"

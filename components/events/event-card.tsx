@@ -16,7 +16,7 @@ export function EventCard({
 
   return (
     <div className="flex flex-col rounded-2xl border border-border bg-card p-5 transition-colors hover:border-accent/50">
-      <Link href={detailHref} className="group flex-1">
+      <Link href={detailHref} prefetch={false} className="group flex-1">
         <h2 className="font-semibold transition-colors group-hover:text-accent">
           {event.title}
         </h2>
@@ -33,6 +33,7 @@ export function EventCard({
           <>
             <Link
               href={`/events/${event.id}/edit?role=admin`}
+              prefetch={false}
               className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
             >
               <Pencil className="h-3.5 w-3.5" />
@@ -41,6 +42,7 @@ export function EventCard({
             <DeleteButton eventId={event.id} />
             <Link
               href={detailHref}
+              prefetch={false}
               className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-accent-soft px-3 py-1.5 text-sm font-medium text-accent transition-colors hover:brightness-95"
             >
               <Users className="h-3.5 w-3.5" />
@@ -51,6 +53,7 @@ export function EventCard({
         ) : (
           <Link
             href={detailHref}
+            prefetch={false}
             className="inline-flex items-center gap-1.5 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground transition-colors hover:bg-accent-strong"
           >
             View &amp; RSVP

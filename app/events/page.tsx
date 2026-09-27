@@ -23,6 +23,7 @@ export default async function EventsPage({
         {isAdmin && (
           <Link
             href="/events/new?role=admin"
+            prefetch={false}
             className="inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-accent px-3 py-2 text-xs font-semibold text-accent-foreground transition-colors hover:bg-accent-strong sm:px-4 sm:text-sm"
           >
             <Plus className="h-4 w-4 shrink-0" />
