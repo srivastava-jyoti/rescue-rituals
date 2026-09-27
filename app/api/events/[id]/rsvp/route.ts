@@ -8,8 +8,6 @@ export async function POST(request: Request, { params }: RouteContext) {
   const { id } = await params;
   const body = await request.json();
   const { name, email, phone } = body;
-
-  // Required-field validation.
   if (!name || !email || !phone) {
     return NextResponse.json(
       { error: "Name, email and phone are required." },
@@ -21,7 +19,6 @@ export async function POST(request: Request, { params }: RouteContext) {
     const rsvp = await createRsvp(id, { name, email, phone });
     return NextResponse.json(rsvp, { status: 201 });
   } catch (err: unknown) {
-    // P2002 = unique constraint: same email already RSVP'd to this event.
     if (
       typeof err === "object" &&
       err !== null &&
@@ -33,7 +30,6 @@ export async function POST(request: Request, { params }: RouteContext) {
         { status: 409 }
       );
     }
-    // Otherwise the event id is likely invalid.
     return NextResponse.json(
       { error: "Could not RSVP. The event may not exist." },
       { status: 400 }
