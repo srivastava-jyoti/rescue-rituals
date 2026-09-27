@@ -17,7 +17,7 @@ export default async function EventsPage({
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="text-2xl font-bold tracking-tight">Events</h1>
-          <p className="mt-1 text-muted-foreground">All events — {events.length} total.</p>
+          <p className="mt-1 text-muted-foreground">All events: {events.length}</p>
         </div>
 
         {isAdmin && (
