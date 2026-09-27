@@ -29,3 +29,8 @@ export function createEvent(data: NewEventInput) {
 export function updateEvent(id: string, data: NewEventInput) {
   return prisma.event.update({ where: { id }, data });
 }
+
+// Delete an event by id (its RSVPs are removed too via the schema's cascade).
+export function deleteEvent(id: string) {
+  return prisma.event.delete({ where: { id } });
+}

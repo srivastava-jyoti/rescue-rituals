@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { getEventById, updateEvent } from "@/lib/events";
+import { getEventById, updateEvent, deleteEvent } from "@/lib/events";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -26,6 +26,17 @@ export async function PUT(request: Request, { params }: RouteContext) {
   try {
     const event = await updateEvent(id, { title, description, date, time, location });
     return NextResponse.json(event);
+  } catch {
+    return NextResponse.json({ error: "Event not found" }, { status: 404 });
+  }
+}
+
+// DELETE /api/events/:id — delete one event
+export async function DELETE(_request: Request, { params }: RouteContext) {
+  const { id } = await params;
+  try {
+    await deleteEvent(id);
+    return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: "Event not found" }, { status: 404 });
   }

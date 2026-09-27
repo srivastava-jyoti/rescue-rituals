@@ -1,6 +1,7 @@
 import type { Event } from "@prisma/client";
 import Link from "next/link";
 import { Pencil } from "lucide-react";
+import { DeleteButton } from "@/components/events/delete-button";
 
 export function EventCard({
   event,
@@ -19,7 +20,7 @@ export function EventCard({
       </div>
 
       {isAdmin && (
-        <div className="mt-4">
+        <div className="mt-4 flex gap-2">
           <Link
             href={`/events/${event.id}/edit?role=admin`}
             className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-muted"
@@ -27,6 +28,7 @@ export function EventCard({
             <Pencil className="h-3.5 w-3.5" />
             Edit
           </Link>
+          <DeleteButton eventId={event.id} />
         </div>
       )}
     </div>
