@@ -12,6 +12,9 @@ const dmSerif = DM_Serif_Display({
   subsets: ["latin"],
 });
 
+// Run server rendering in Mumbai, next to the Supabase database.
+export const preferredRegion = "bom1";
+
 export const metadata: Metadata = {
   title: "Rescue Rituals — Events",
   description: "Find and RSVP to local animal rescue events.",

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { createRsvp } from "@/lib/events";
 
+export const preferredRegion = "bom1";
+
 type RouteContext = { params: Promise<{ id: string }> };
 
 // POST /api/events/:id/rsvp — RSVP to an event

@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getEvents, createEvent } from "@/lib/events";
 
+export const preferredRegion = "bom1";
+
 // GET /api/events
 export async function GET() {
   const events = await getEvents();

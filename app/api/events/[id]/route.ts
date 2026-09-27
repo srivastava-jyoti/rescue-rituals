@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { getEventById, updateEvent, deleteEvent } from "@/lib/events";
 
+export const preferredRegion = "bom1";
+
 type RouteContext = { params: Promise<{ id: string }> };
 
 // GET /api/events/:id — fetch one event
